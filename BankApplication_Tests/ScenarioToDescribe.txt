@@ -1,0 +1,16 @@
+﻿Feature: BankApplication
+	Basic account operation (deposit, withdrawal)
+	I want to manage bank account of clients.
+	1) The client can do some operation like deposit, withdrawal.
+	2) The client can also do a transfert from account to another account of the same bank.
+
+Scenario: Can depose and withdraw money on my account
+	Given a client makes a deposit of 1000€ on 10-01-2016
+	And a deposit of 2000€ on 13-01-2016
+	And a withdrawal of 500€ on 14-01-2016
+	When he prints his bank statement
+	Then he should see
+	|Date       | Credit    | Debit  | Balance|
+	|14/01/2017 |           | 500.00 | 2500.00|
+	|13/01/2017 | 2000.00   |        | 3000.00|
+	|10/01/2017 | 1000.00   |        | 1000.00|

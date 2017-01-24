@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC281A46-169F-4892-B9A4-1AE73CC7901B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bank_Application</RootNamespace>
-    <AssemblyName>Bank_Application</AssemblyName>
+    <RootNamespace>BankService</RootNamespace>
+    <AssemblyName>BankService</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,11 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="AccountOperations.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Clients.cs" />
+    <Compile Include="Domain\Deposit.cs" />
+    <Compile Include="Domain\Operation.cs" />
+    <Compile Include="Domain\OperationType.cs" />
+    <Compile Include="Domain\Withdrawal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\BankServiceModel\BankServiceModel.csproj">
+      <Project>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</Project>
+      <Name>BankServiceModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
