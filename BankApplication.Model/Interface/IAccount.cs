@@ -1,14 +1,12 @@
-using System;
-
 namespace BankApplication.Model.Interface
 {
     public interface IAccount
     {
-        BankMessage Deposit(DateTime date, int amount);
+        BankMessage Deposit(OperationDetail operation);
 
-        BankMessage Withdrawal(DateTime date, int amount);
+        BankMessage Withdrawal(OperationDetail operation);
 
-        BankMessage Transfert(IAccount receiver, DateTime date, int amount);
+        BankMessage Transfert(IAccount receiver, OperationDetail operation);
 
         int Balance();
     }

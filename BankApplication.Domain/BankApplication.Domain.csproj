@@ -40,17 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDomainAccount.cs" />
-    <Compile Include="Operation\Base\OperationType.cs" />
-    <Compile Include="OperationList.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Clients.cs" />
-    <Compile Include="Operation\Deposit.cs" />
-    <Compile Include="Operation\Base\BaseOperation.cs" />
-    <Compile Include="Operation\TransfertAsWithdrawal.cs" />
-    <Compile Include="Operation\TransfertAsDeposit.cs" />
-    <Compile Include="Operation\Withdrawal.cs" />
+    <Compile Include="Operation\Credit.cs" />
+    <Compile Include="Operation\BaseOperation.cs" />
+    <Compile Include="Operation\Debit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

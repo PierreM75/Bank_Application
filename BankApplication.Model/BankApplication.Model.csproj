@@ -45,6 +45,7 @@
     <Compile Include="Interface\IClients.cs" />
     <Compile Include="BankMessage.cs" />
     <Compile Include="Interface\IAccount.cs" />
+    <Compile Include="OperationDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

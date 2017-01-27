@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BankApplication.Domain.Operation.Base;
+using BankApplication.Domain.Operation;
 using BankApplication.Model;
 
 namespace BankApplication.Domain
 {
-    internal class OperationList
+    internal class Operations
     {
         private readonly List<BaseOperation> operations;
         
-        internal OperationList()
+        internal Operations()
         {
             operations = new List<BaseOperation>();
         }
 
         internal BankMessage Execute(BaseOperation operation)
         {
-            var message = operation.Allowed(Balance());
+            var message = operation.IsAllowed(Balance());
             if (message.Status() == BankStatus.Success)
             {
                 operations.Add(operation);

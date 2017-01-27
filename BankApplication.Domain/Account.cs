@@ -1,39 +1,33 @@
-﻿using System;
-using BankApplication.Domain.Operation;
+﻿using BankApplication.Domain.Operation;
 using BankApplication.Model;
 using BankApplication.Model.Interface;
 
 namespace BankApplication.Domain
 {
-    public class Account: IDomainAccount, IAccount
+    public class Account: IAccount
     {
-        private readonly OperationList operations = new OperationList();
+        private readonly Operations operations = new Operations();
 
-        public BankMessage Deposit(DateTime date, int amount)
+        public BankMessage Deposit(OperationDetail operation)
         {
-            return operations.Execute(new Deposit(date, amount));
+            return operations.Execute(new Credit(operation));
         }
 
-        public BankMessage Withdrawal(DateTime date, int amount)
+        public BankMessage Withdrawal(OperationDetail operation)
         {
-            return operations.Execute(new Withdrawal(date, amount));
+            return operations.Execute(new Debit(operation));
         }
 
-        public BankMessage Transfert(IAccount receiver, DateTime date, int amount)
+        public BankMessage Transfert(IAccount receiver, OperationDetail operation)
         {
-            var message = operations.Execute(new TransfertAsWithdrawal((IClient)receiver, date, amount));
-            if (message.Status() == BankStatus.InsufficientFund)
+            var message = Withdrawal(operation);
+            if (message.Status() != BankStatus.Success )
             {
                 return message;
             }
             
-            ((IDomainAccount) receiver).DepositFromAccount(this, date, amount);
+            receiver.Deposit(operation);
             return message;
-        }
-
-        public BankMessage DepositFromAccount(IAccount sender, DateTime date, int amount)
-        {
-            return operations.Execute(new TransfertAsDeposit((IClient)sender, date, amount));
         }
 
         public int Balance()

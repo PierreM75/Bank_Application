@@ -13,24 +13,26 @@ namespace BankApplication.Tests
         {
             var client = new Client(clientName);
             clients.Create(client);
-            message = client.Deposit(date.ConvertDate(), amount);
+            message = client.Deposit(new OperationDetail(date.ConvertDate(), amount));
         }
 
         internal void Deposit(string clientName, int amount, string date)
         {
-            message = GetClient(clientName).Deposit(date.ConvertDate(), amount);
+            message = GetClient(clientName).Deposit(new OperationDetail(date.ConvertDate(), amount));
         }
 
         internal void Withdrawal(string clientName, int amount, string date)
         {
-            message = GetClient(clientName).Withdrawal(date.ConvertDate(), amount);
+            var operation = new OperationDetail(date.ConvertDate(), amount);
+            message = GetClient(clientName).Withdrawal(operation);
         }
 
         internal void Transfert(string fromClientName, string toClientName, int amount, string date)
         {
             var fromClient = GetClient(fromClientName);
             var toClient = GetClient(toClientName);
-            message = fromClient.Transfert(toClient, date.ConvertDate(), amount);
+            var operation = new OperationDetail(date.ConvertDate(), amount);
+            message = fromClient.Transfert(toClient, operation);
         }
 
         internal int GetBalance(string clientName)
@@ -43,7 +45,7 @@ namespace BankApplication.Tests
             return message;
         }
         
-        private IClient GetClient(string clientName)
+        internal IClient GetClient(string clientName)
         {
             var client = clients.Select(clientName);
             return client;

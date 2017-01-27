@@ -7,39 +7,49 @@ namespace BankApplication.Tests
     [Binding]
     public class BankTransferSteps
     {
-        private readonly BankApplicationContext bankApplicationContext = new BankApplicationContext();
-        
+        private BankApplicationTest context;
+
+        [BeforeScenario()]
+        public void Setup()
+        {
+            context = new BankApplicationTest();
+        }
+
         [Given(@"a client (.*) bank account with a balance of (.*)€ on (.*)")]
         [Given(@"another client (.*) bank account with a balance of (.*)€ on (.*)")]
         public void GivenAClientNameBankAccountWithABalanceOf(string client, int amount, string date)
         {
-            bankApplicationContext.CreateClientAccount(client, amount, date);
-            Check.That(bankApplicationContext.Message().Message()).Equals($"{date} - Deposit - {amount}");
+            context.CreateClientAccount(client, amount, date);
         }
 
         [When(@"the client (.*) do a transfert of (.*)€ on (.*) to the account client (.*)")]
         public void WhenTheClientNameDoATransfertOfToTheClientNameAccount(string client1, int amount, string date, string client2)
         {
-            bankApplicationContext.Transfert(client1, client2, amount, date);
-            Check.That(bankApplicationContext.Message().Message()).Equals($"{date} - Transfer to {client2} - -{amount}");
+            context.Transfert(client1, client2, amount, date);
         }
         
         [Then(@"the client (.*) should see a balance account equal to (.*)€")]
         public void ThenClientNameShouldSeeABalanceAccountEqualTo(string client, int amount)
         {
-            Check.That(bankApplicationContext.GetBalance(client)).Equals(amount);
+            Check.That(context.GetBalance(client)).Equals(amount);
         }
         
         [Then(@"the client (.*) should be allowed to transfert money\.")]
         public void ThenClientNameShouldBeAllowedToTransfertMoney(string client)
         {
-            Check.That(bankApplicationContext.Message().Status()).Equals(BankStatus.Success);
+            Check.That(context.Message().Status()).Equals(BankStatus.Success);
         }
 
         [Then(@"the client (.*) should not be allowed to transfert money\.")]
         public void ThenClientNameShouldNotBeAllowedToTransfertMoney(string client)
         {
-            Check.That(bankApplicationContext.Message().Status()).Equals(BankStatus.InsufficientFund);
+            Check.That(context.Message().Status()).Equals(BankStatus.InsufficientFund);
+        }
+
+        [Then(@"the client (.*) should be alerted that operation is invalid\.")]
+        public void ThenHeShouldBeAlertedThatOperationIsInvalid(string client)
+        {
+            Check.That(context.Message().Status()).Equals(BankStatus.InvalidOperation);
         }
     }
 }

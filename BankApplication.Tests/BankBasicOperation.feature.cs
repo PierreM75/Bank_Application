@@ -66,18 +66,18 @@ namespace BankApplication.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Deposit money on an account")]
+        [NUnit.Framework.DescriptionAttribute("Deposit cash on an account")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void DepositMoneyOnAnAccount()
+        public virtual void DepositCashOnAnAccount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit money on an account", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit cash on an account", new string[] {
                         "mytag"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.When("the client do a deposit of 1000€ on 13-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the client do a deposit of 1000€ on 13/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("he should see a balance account equal to 1000€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -85,40 +85,78 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Withdrawal money on an account")]
-        public virtual void WithdrawalMoneyOnAnAccount()
+        [NUnit.Framework.DescriptionAttribute("Deposit cash on an account with invalid amount")]
+        public virtual void DepositCashOnAnAccountWithInvalidAmount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdrawal money on an account", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit cash on an account with invalid amount", ((string[])(null)));
 #line 12
 this.ScenarioSetup(scenarioInfo);
 #line 13
  testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
- testRunner.When("the client do a deposit of 2000€ on 13-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the client do a deposit of -1000€ on 13/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.And("the client do a withdrawal of 1000€ on 14-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("he should see a balance account equal to 0€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 16
+ testRunner.Then("he should be alerted that operation is invalid.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Withdrawal cash on an account")]
+        public virtual void WithdrawalCashOnAnAccount()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdrawal cash on an account", ((string[])(null)));
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.When("the client do a deposit of 2000€ on 13/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.And("the client do a withdrawal of 1000€ on 14/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
  testRunner.Then("he should see a balance account equal to 1000€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 17
+#line 23
  testRunner.And("he should be allowed to withdraw money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Withdrawal money on an account is forbidden")]
-        public virtual void WithdrawalMoneyOnAnAccountIsForbidden()
+        [NUnit.Framework.DescriptionAttribute("Withdrawal cash on an account with invalid amount")]
+        public virtual void WithdrawalCashOnAnAccountWithInvalidAmount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdrawal money on an account is forbidden", ((string[])(null)));
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdrawal cash on an account with invalid amount", ((string[])(null)));
+#line 25
 this.ScenarioSetup(scenarioInfo);
-#line 20
+#line 26
  testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
- testRunner.When("the client do a withdrawal of 1000€ on 13-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 27
+ testRunner.When("the client do a withdrawal of -1000€ on 14/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
  testRunner.Then("he should see a balance account equal to 0€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
+#line 29
+ testRunner.And("he should be alerted that operation is invalid.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Withdrawal cash on an account is forbidden")]
+        public virtual void WithdrawalCashOnAnAccountIsForbidden()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdrawal cash on an account is forbidden", ((string[])(null)));
+#line 31
+this.ScenarioSetup(scenarioInfo);
+#line 32
+ testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+ testRunner.When("the client do a withdrawal of 1000€ on 13/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+ testRunner.Then("he should see a balance account equal to 0€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
  testRunner.And("he should not be allowed to withdraw money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -129,19 +167,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ExecuteManyBasicOperationsOnAnAccount()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute many basic operations on an account", ((string[])(null)));
-#line 25
+#line 37
 this.ScenarioSetup(scenarioInfo);
-#line 26
+#line 38
  testRunner.Given("a empty client bank account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
- testRunner.When("the client do a deposit of 5000€ on 12-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
- testRunner.And("the client do a withdrawal of 1000€ on 13-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.And("the client do a withdrawal of 1000€ on 14-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 39
+ testRunner.When("the client do a deposit of 5000€ on 12/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
+ testRunner.And("the client do a withdrawal of 1000€ on 13/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.And("the client do a withdrawal of 1000€ on 14/01/2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
  testRunner.Then("he should see a balance account equal to 3000€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
+#line 43
  testRunner.And("he should be allowed to withdraw money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

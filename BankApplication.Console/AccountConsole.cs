@@ -1,4 +1,5 @@
 using System;
+using BankApplication.Model;
 using BankApplication.Model.Interface;
 
 namespace BankApplication.Console
@@ -16,16 +17,23 @@ namespace BankApplication.Console
                 System.Console.WriteLine("3: Transfert");
                 System.Console.WriteLine("q: Quit");
                 var userInput = System.Console.ReadKey();
+
+                OperationDetail operation = null;
+                if (userInput.KeyChar != 'q')
+                {
+                    operation = new OperationDetail(DateTime.Today, SelectAmount());
+                }
+
                 switch (userInput.KeyChar)
                 {
                     case '1':
-                        client.Deposit(DateTime.Today, SelectAmount());
+                        client.Deposit(operation);
                         break;
                     case '2':
-                        client.Withdrawal(DateTime.Today, SelectAmount());
+                        client.Withdrawal(operation);
                         break;
                     case '3':
-                        client.Transfert(ClientConsole.GetClient(), DateTime.Today, SelectAmount());
+                        client.Transfert(ClientConsole.GetClient(), operation);
                         break;
                     case 'q':
                         return;

@@ -3,12 +3,12 @@
     public class BankMessage
     {
         private readonly BankStatus status;
-        private readonly string message;
+        private readonly string label;
 
-        public BankMessage(BankStatus status, string message)
+        public BankMessage(BankStatus status, string label)
         {
             this.status = status;
-            this.message = message;
+            this.label = label;
         }
 
         public BankStatus Status()
@@ -16,9 +16,9 @@
             return status;
         }
 
-        public string Message()
+        public string Label()
         {
-            return message;
+            return label;
         }
     }
 }
