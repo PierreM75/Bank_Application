@@ -91,11 +91,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankServiceModel\BankApplication.Model.csproj">
+    <ProjectReference Include="..\BankApplication.Model\BankApplication.Model.csproj">
       <Project>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</Project>
       <Name>BankApplication.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankService\BankApplication.Domain.csproj">
+    <ProjectReference Include="..\BankApplication.Domain\BankApplication.Domain.csproj">
       <Project>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</Project>
       <Name>BankApplication.Domain</Name>
     </ProjectReference>

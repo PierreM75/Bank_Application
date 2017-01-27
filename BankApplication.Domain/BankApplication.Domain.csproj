@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankServiceModel\BankApplication.Model.csproj">
+    <ProjectReference Include="..\BankApplication.Model\BankApplication.Model.csproj">
       <Project>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</Project>
       <Name>BankApplication.Model</Name>
     </ProjectReference>
