@@ -1,55 +1,51 @@
-﻿using BankService;
-using BankServiceModel;
-using BankServiceModel.Interfaces;
+using BankApplication.Domain;
+using BankApplication.Model;
+using BankApplication.Model.Interface;
 
-namespace BankApplicationTests
+namespace BankApplication.Tests
 {
     internal class BankApplicationContext
     {
         private readonly IClients clients = new Clients();
-        private MessageServiceType message;
-        
+        private BankMessage message;
+
         internal void CreateClientAccount(string clientName, int amount, string date)
         {
             var client = new Client(clientName);
+            clients.Create(client);
             message = client.Deposit(date.ConvertDate(), amount);
-            clients.Add(client);
         }
 
         internal void Deposit(string clientName, int amount, string date)
         {
-            var client = GetClient(clientName);
-            message = client.Deposit(date.ConvertDate(), amount);
+            message = GetClient(clientName).Deposit(date.ConvertDate(), amount);
         }
-        
+
         internal void Withdrawal(string clientName, int amount, string date)
         {
-            var client = GetClient(clientName);
-            message = client.Withdrawal(date.ConvertDate(), amount);
+            message = GetClient(clientName).Withdrawal(date.ConvertDate(), amount);
         }
 
         internal void Transfert(string fromClientName, string toClientName, int amount, string date)
         {
             var fromClient = GetClient(fromClientName);
             var toClient = GetClient(toClientName);
-
             message = fromClient.Transfert(toClient, date.ConvertDate(), amount);
         }
 
         internal int GetBalance(string clientName)
         {
-            var client = GetClient(clientName);
-            return client.GetBalanceAccount();
+            return GetClient(clientName).Balance();
         }
 
-        internal string Message()
+        internal BankMessage Message()
         {
-            return message.ToString();
+            return message;
         }
-
+        
         private IClient GetClient(string clientName)
         {
-            var client = clients.GetClientByName(clientName);
+            var client = clients.Select(clientName);
             return client;
         }
     }

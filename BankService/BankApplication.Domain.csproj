@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</ProjectGuid>
+    <ProjectGuid>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankServiceModel</RootNamespace>
-    <AssemblyName>BankServiceModel</AssemblyName>
+    <RootNamespace>BankApplication.Domain</RootNamespace>
+    <AssemblyName>BankApplication.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,11 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IClient.cs" />
-    <Compile Include="Interfaces\IClients.cs" />
-    <Compile Include="MessageServiceType.cs" />
-    <Compile Include="Interfaces\IAccount.cs" />
+    <Compile Include="IDomainAccount.cs" />
+    <Compile Include="Operation\Base\OperationType.cs" />
+    <Compile Include="OperationList.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Clients.cs" />
+    <Compile Include="Operation\Deposit.cs" />
+    <Compile Include="Operation\Base\BaseOperation.cs" />
+    <Compile Include="Operation\TransfertAsWithdrawal.cs" />
+    <Compile Include="Operation\TransfertAsDeposit.cs" />
+    <Compile Include="Operation\Withdrawal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankServiceModel\BankApplication.Model.csproj">
+      <Project>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</Project>
+      <Name>BankApplication.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

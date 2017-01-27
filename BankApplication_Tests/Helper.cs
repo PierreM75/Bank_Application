@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 
-namespace BankApplicationTests
+namespace BankApplication.Tests
 {
-    internal static class BankApplicationHelper
+    public static class Helper
     {
         internal static DateTime ConvertDate(this string date)
         {

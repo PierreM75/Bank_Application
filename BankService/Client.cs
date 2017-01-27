@@ -1,6 +1,6 @@
-using BankServiceModel.Interfaces;
+using BankApplication.Model.Interface;
 
-namespace BankService
+namespace BankApplication.Domain
 {
     public class Client : Account, IClient
     {
@@ -11,7 +11,7 @@ namespace BankService
             name = clientName;
         }
 
-        public string ClientName()
+        public string Name()
         {
             return name;
         }

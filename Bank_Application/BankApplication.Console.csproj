@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{DC281A46-169F-4892-B9A4-1AE73CC7901B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankService</RootNamespace>
-    <AssemblyName>BankService</AssemblyName>
+    <RootNamespace>BankApplication.Console</RootNamespace>
+    <AssemblyName>BankApplication.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,20 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountOperations.cs" />
-    <Compile Include="Account.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Clients.cs" />
-    <Compile Include="Domain\Deposit.cs" />
-    <Compile Include="Domain\Operation.cs" />
-    <Compile Include="Domain\OperationType.cs" />
-    <Compile Include="Domain\Withdrawal.cs" />
+    <Compile Include="AccountConsole.cs" />
+    <Compile Include="ClientConsole.cs" />
+    <Compile Include="MainConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankServiceModel\BankServiceModel.csproj">
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankServiceModel\BankApplication.Model.csproj">
       <Project>{253197AE-3D30-4CAC-9EFD-DFEAD8BED89E}</Project>
-      <Name>BankServiceModel</Name>
+      <Name>BankApplication.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankService\BankApplication.Domain.csproj">
+      <Project>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</Project>
+      <Name>BankApplication.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

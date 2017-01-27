@@ -1,0 +1,49 @@
+using System;
+using BankApplication.Model.Interface;
+
+namespace BankApplication.Console
+{
+    internal class AccountConsole
+    {
+        internal static void AccountScreen(IClient client)
+        {
+            while (true)
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"Welcome dear {client.Name()}. Your balance account is /d{client.Balance()} €.");
+                System.Console.WriteLine("1: Deposit");
+                System.Console.WriteLine("2: Withdrawal");
+                System.Console.WriteLine("3: Transfert");
+                System.Console.WriteLine("q: Quit");
+                var userInput = System.Console.ReadKey();
+                switch (userInput.KeyChar)
+                {
+                    case '1':
+                        client.Deposit(DateTime.Today, SelectAmount());
+                        break;
+                    case '2':
+                        client.Withdrawal(DateTime.Today, SelectAmount());
+                        break;
+                    case '3':
+                        client.Transfert(ClientConsole.GetClient(), DateTime.Today, SelectAmount());
+                        break;
+                    case 'q':
+                        return;
+                }
+            }
+        }
+
+        private static int SelectAmount()
+        {
+            var success = false;
+            var amount = 0;
+            while (!success)
+            {
+                System.Console.WriteLine("How much?:");
+                success = int.TryParse(System.Console.ReadLine(), out amount);
+            }
+
+            return amount;
+        }
+    }
+}

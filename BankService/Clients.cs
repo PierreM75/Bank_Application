@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using BankServiceModel.Interfaces;
+using BankApplication.Model.Interface;
 
-namespace BankService
+namespace BankApplication.Domain
 {
     public class Clients : IClients
     {
@@ -13,14 +13,14 @@ namespace BankService
             clients = new List<IClient>();
         }
 
-        public void Add(IClient client)
+        public void Create(IClient client)
         {
-            clients.Add(client); 
+            clients.Add(client);
         }
 
-        public IClient GetClientByName(string clientName)
+        public IClient Select(string clientName)
         {
-            return clients.FirstOrDefault(cl => cl.ClientName() == clientName);
+            return clients.FirstOrDefault(cl => cl.Name() == clientName);
         }
     }
 }

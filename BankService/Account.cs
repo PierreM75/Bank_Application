@@ -1,58 +1,44 @@
 ﻿using System;
-using BankService.Domain;
-using BankServiceModel;
-using BankServiceModel.Interfaces;
+using BankApplication.Domain.Operation;
+using BankApplication.Model;
+using BankApplication.Model.Interface;
 
-namespace BankService
+namespace BankApplication.Domain
 {
-    public class Account : IAccount
+    public class Account: IDomainAccount, IAccount
     {
-        private readonly AccountOperations operations;
+        private readonly OperationList operations = new OperationList();
 
-        public Account()
+        public BankMessage Deposit(DateTime date, int amount)
         {
-            operations = new AccountOperations();
+            return operations.Execute(new Deposit(date, amount));
         }
 
-        public MessageServiceType Deposit(DateTime date, int amount)
+        public BankMessage Withdrawal(DateTime date, int amount)
         {
-            var operation = new Deposit(date, amount);
-            AddOperation(operation);
-
-            return MessageServiceType.Success;
+            return operations.Execute(new Withdrawal(date, amount));
         }
 
-        public MessageServiceType Withdrawal(DateTime date, int amount)
+        public BankMessage Transfert(IAccount receiver, DateTime date, int amount)
         {
-            var balance = GetBalanceAccount();
-            if (balance < amount)
+            var message = operations.Execute(new TransfertAsWithdrawal((IClient)receiver, date, amount));
+            if (message.Status() == BankStatus.InsufficientFund)
             {
-                return MessageServiceType.InsufficientFund;
+                return message;
             }
             
-            var operation = new Withdrawal(date, amount);
-            AddOperation(operation);
-
-            return MessageServiceType.Success;
+            ((IDomainAccount) receiver).DepositFromAccount(this, date, amount);
+            return message;
         }
 
-        public MessageServiceType Transfert(IAccount account, DateTime date, int amount)
+        public BankMessage DepositFromAccount(IAccount sender, DateTime date, int amount)
         {
-            var message = Withdrawal(date, amount);
-
-            return message == MessageServiceType.InsufficientFund
-                ? message
-                : account.Deposit(date, amount);
+            return operations.Execute(new TransfertAsDeposit((IClient)sender, date, amount));
         }
 
-        public int GetBalanceAccount()
+        public int Balance()
         {
-            return operations.GetBalance();
-        }
-
-        private void AddOperation(Operation operation)
-        {
-            operations.Add(operation);
+            return operations.Balance();
         }
     }
 }

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace BankApplicationTests
+namespace BankApplication.Tests
 {
     using TechTalk.SpecFlow;
     
@@ -32,7 +32,8 @@ namespace BankApplicationTests
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Bank Transfer to another client in the same bank", "\tIn order to manage a great bank application, \r\n\tAs a bank user,\r\n\tI want to tran" +
-                    "sfert fund from my account to another client account in the same bank. ", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "sfert fund from my account to another client account in the same bank. \r\n\tTo ver" +
+                    "ify this feature I need to verify the account balance.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -71,19 +72,19 @@ namespace BankApplicationTests
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transfert to another client in the same bank", new string[] {
                         "mytag"});
-#line 7
-this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("a client Name1 bank account with a balance of 1000€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 9
- testRunner.Given("also another client Name2 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("a client Name1 bank account with a balance of 1000€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
+ testRunner.Given("another client Name2 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 11
  testRunner.When("the client Name1 do a transfert of 1000€ on 13-01-2017 to the account client Name" +
                     "2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
- testRunner.Then("Client Name2 should see a balance account equal to 1000€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 12
- testRunner.And("Client Name1 should be allowed to transfert money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the client Name2 should see a balance account equal to 1000€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
+ testRunner.And("the client Name1 should be allowed to transfert money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -93,19 +94,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TransfertToAnotherClientInTheSameBankWithUnsufisientFunds_()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transfert to another client in the same bank with unsufisient funds.", ((string[])(null)));
-#line 14
-this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Given("a client Name1 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 16
- testRunner.Given("also another client Name2 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("a client Name1 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
+ testRunner.Given("another client Name2 bank account with a balance of 0€ on 01-01-2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 18
  testRunner.When("the client Name1 do a transfert of 1000€ on 01-01-2017 to the account client Name" +
                     "2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
- testRunner.Then("Client Name2 should see a balance account equal to 0€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
- testRunner.And("Client Name1 should not be allowed to transfert money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the client Name2 should see a balance account equal to 0€", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
+ testRunner.And("the client Name1 should not be allowed to transfert money.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
