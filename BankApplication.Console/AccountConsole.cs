@@ -1,6 +1,9 @@
 using System;
+using System.Linq;
 using BankApplication.Model;
+using BankApplication.Model.Filter;
 using BankApplication.Model.Interface;
+using BankApplication.Model.Operation;
 
 namespace BankApplication.Console
 {
@@ -12,27 +15,33 @@ namespace BankApplication.Console
             {
                 System.Console.Clear();
                 System.Console.WriteLine(
-                    $"Welcome dear {client.Name()}. Your balance account is /d{client.Balance()} €.");
+                    $"Welcome dear {client.Name()}. Your balance account is {client.Balance()} €.");
                 System.Console.WriteLine("1: Deposit");
                 System.Console.WriteLine("2: Withdrawal");
                 System.Console.WriteLine("3: Transfert");
+                System.Console.WriteLine("4: Statements");
                 System.Console.WriteLine("q: Quit");
                 var userInput = System.Console.ReadKey();
-
-                Operation operation = null;
-                if (userInput.KeyChar != 'q')
-                    operation = new Operation(DateTime.Today, SelectAmount());
+                System.Console.WriteLine();
 
                 switch (userInput.KeyChar)
                 {
                     case '1':
-                        client.Deposit(operation);
+                        client.Deposit(new Operation(DateTime.Now, SelectAmount()));
                         break;
                     case '2':
-                        client.Withdrawal(operation);
+                        client.Withdrawal(new Operation(DateTime.Now, SelectAmount()));
                         break;
                     case '3':
-                        client.Transfert(ClientConsole.GetClient(), operation);
+                        client.Transfert(ClientConsole.GetClient(), new Operation(DateTime.Now, SelectAmount()));
+                        break;
+                    case '4':
+                        System.Console.WriteLine("Date - Operation - Amount - Balance");
+                        client.Statements(new PeriodFilter(DateTime.MinValue, DateTime.MaxValue), new AmountFilter())
+                            .ToList()
+                            .ForEach(statement => System.Console.WriteLine(statement.ShowStatement()));
+                        
+                        System.Console.ReadLine();
                         break;
                     case 'q':
                         return;
@@ -46,7 +55,7 @@ namespace BankApplication.Console
             var amount = 0;
             while (!success)
             {
-                System.Console.WriteLine("How much?:");
+                System.Console.Write("How much?:");
                 success = int.TryParse(System.Console.ReadLine(), out amount);
             }
 

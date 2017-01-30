@@ -1,12 +1,18 @@
+using System.Collections.Generic;
+using BankApplication.Model.Filter;
+using BankApplication.Model.Operation;
+
 namespace BankApplication.Model.Interface
 {
     public interface IAccount
     {
-        TransactionMessage Deposit(Operation operation);
+        TransactionStatus Deposit(Operation.Operation operation);
 
-        TransactionMessage Withdrawal(Operation operation);
+        TransactionStatus Withdrawal(Operation.Operation operation);
 
-        TransactionMessage Transfert(IAccount receiver, Operation operation);
+        TransactionStatus Transfert(IAccount receiver, Operation.Operation operation);
+
+        IEnumerable<Statement> Statements (PeriodFilter periodFilter, AmountFilter amountFilter);
 
         int Balance();
     }

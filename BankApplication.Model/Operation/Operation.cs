@@ -1,6 +1,6 @@
 using System;
 
-namespace BankApplication.Model
+namespace BankApplication.Model.Operation
 {
     public class Operation
     {

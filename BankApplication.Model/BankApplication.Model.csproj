@@ -40,12 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TransactionStatus.cs" />
+    <Compile Include="Filter\AmountFilter.cs" />
+    <Compile Include="Filter\FilterBase.cs" />
+    <Compile Include="Filter\PeriodFilter.cs" />
+    <Compile Include="Operation\OperationDetail.cs" />
+    <Compile Include="Operation\OperationType.cs" />
+    <Compile Include="Statement.cs" />
+    <Compile Include="Operation\TransactionStatus.cs" />
     <Compile Include="Interface\IClient.cs" />
     <Compile Include="Interface\IClients.cs" />
-    <Compile Include="TransactionMessage.cs" />
     <Compile Include="Interface\IAccount.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Operation\Operation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

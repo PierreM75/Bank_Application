@@ -9,7 +9,10 @@ namespace BankApplication.Console
 
         private static void Main(string[] args)
         {
-            ClientConsole.ClientScreen();
+            while (true)
+            {
+                ClientConsole.ClientScreen();
+            }
         }
     }
 }

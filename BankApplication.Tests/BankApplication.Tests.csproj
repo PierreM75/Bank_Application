@@ -62,15 +62,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BankApplicationTest.cs" />
+    <Compile Include="BankStatements.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankStatements.feature</DependentUpon>
+    </Compile>
     <Compile Include="BankApplicationContext.cs" />
-    <Compile Include="BankBasicOperationSteps.cs" />
+    <Compile Include="BankApplicationSteps.cs" />
     <Compile Include="BankTransfer.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BankTransfer.feature</DependentUpon>
     </Compile>
-    <Compile Include="BankTransferSteps.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BankBasicOperation.feature.cs">
@@ -81,6 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BankStatements.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BankStatements.feature.cs</LastGenOutput>
+    </None>
     <None Include="BankTransfer.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BankTransfer.feature.cs</LastGenOutput>
@@ -100,9 +107,6 @@
       <Project>{B3CE65A8-9D43-4909-A682-D4B9B917FC1C}</Project>
       <Name>BankApplication.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ScenarioToDescribe.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

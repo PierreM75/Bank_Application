@@ -14,8 +14,9 @@ namespace BankApplication.Console
                 System.Console.WriteLine("Welcome to Bank Application.");
                 System.Console.WriteLine("1: Select client's account");
                 System.Console.WriteLine("2: Create new client's account");
-                System.Console.WriteLine("q: Quit");
                 var userInput = System.Console.ReadKey();
+                System.Console.WriteLine();
+
                 switch (userInput.KeyChar)
                 {
                     case '1':
@@ -24,8 +25,6 @@ namespace BankApplication.Console
                     case '2':
                         client = CreateClient();
                         break;
-                    case 'q':
-                        return;
                 }
             }
 
@@ -51,7 +50,7 @@ namespace BankApplication.Console
 
         private static IClient CreateClient()
         {
-            System.Console.WriteLine("Enter new user:");
+            System.Console.Write("Enter new user:");
             var client = new Client(System.Console.ReadLine());
             MainConsole.Context.Create(client);
             return client;

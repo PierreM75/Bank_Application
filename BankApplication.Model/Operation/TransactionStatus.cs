@@ -1,4 +1,4 @@
-namespace BankApplication.Model
+namespace BankApplication.Model.Operation
 {
     public enum TransactionStatus
     {

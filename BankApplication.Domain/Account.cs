@@ -1,6 +1,11 @@
-﻿using BankApplication.Domain.Transaction;
+﻿using System;
+using System.Collections.Generic;
+using BankApplication.Domain.Transaction;
 using BankApplication.Model;
 using BankApplication.Model.Interface;
+using System.Linq;
+using BankApplication.Model.Filter;
+using BankApplication.Model.Operation;
 
 namespace BankApplication.Domain
 {
@@ -8,39 +13,41 @@ namespace BankApplication.Domain
     {
         private readonly Transactions transactions = new Transactions();
 
-        public TransactionMessage Deposit(Operation operation)
+        public TransactionStatus Deposit(Operation operation)
         {
             var transaction = new Credit(operation);
-            var status = ExecuteTransaction(transaction);
-
-            return new TransactionMessage(status, transaction.Statement());
+            return Execute(transaction);
         }
         
-        public TransactionMessage Withdrawal(Operation operation)
+        public TransactionStatus Withdrawal(Operation operation)
         {
             var transaction = new Debit(operation);
-            var status = ExecuteTransaction(transaction);
-            
-            return new TransactionMessage(status, transaction.Statement());
+            return Execute(transaction);
         }
 
-        public TransactionMessage Transfert(IAccount receiver, Operation operation)
+        public TransactionStatus Transfert(IAccount receiver, Operation operation)
         {
-            var message = Withdrawal(operation);
-            if (message.Status() == TransactionStatus.Success)
+            var status = Withdrawal(operation);
+            if (status == TransactionStatus.Success)
             {
                 receiver.Deposit(operation);
             }
             
-            return message;
+            return status;
         }
+
+        public IEnumerable<Statement> Statements(PeriodFilter periodFilter, AmountFilter amountFilter)
+        {
+            var statements = new Statements(transactions.GetAll());
+            return statements.Filter(periodFilter, amountFilter);
+        } 
 
         public int Balance()
         {
             return transactions.Balance();
         }
 
-        private TransactionStatus ExecuteTransaction(TransactionBase transaction)
+        private TransactionStatus Execute(TransactionBase transaction)
         {
             var status = transaction.IsValid(Balance());
             if (status == TransactionStatus.Success)

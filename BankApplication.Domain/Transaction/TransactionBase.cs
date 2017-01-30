@@ -1,26 +1,37 @@
 using System;
 using BankApplication.Model;
+using BankApplication.Model.Operation;
 
 namespace BankApplication.Domain.Transaction
 {
     internal abstract class TransactionBase
     {
-        private readonly DateTime date;
-
-        protected TransactionBase(DateTime date)
+        private readonly OperationType operationType;
+        private readonly Operation operation;
+        
+        protected TransactionBase(OperationType operationType, Operation operation)
         {
-            this.date = date;
-        }
-
-        internal abstract int Amount();
-
-        protected string Date()
-        {
-            return date.ToString("dd/MM/yyyy");
+            this.operationType = operationType;
+            this.operation = operation;
         }
 
         internal abstract TransactionStatus IsValid(int balance);
 
-        internal abstract string Statement();
+        internal virtual int Amount()
+        {
+            return operation.Amount();
+        }
+
+        internal DateTime Date()
+        {
+            return operation.Date();
+        }
+        
+        internal Statement Statement(int balance)
+        {
+            return new Statement(
+                operation,
+                new OperationDetail(operationType, balance));
+        }
     }
 }
