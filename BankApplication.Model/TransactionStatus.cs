@@ -1,6 +1,6 @@
 namespace BankApplication.Model
 {
-    public enum BankStatus
+    public enum TransactionStatus
     {
         InsufficientFund,
         InvalidOperation,

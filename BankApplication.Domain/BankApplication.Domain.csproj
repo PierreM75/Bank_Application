@@ -40,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Operations.cs" />
+    <Compile Include="Transactions.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Clients.cs" />
-    <Compile Include="Operation\Credit.cs" />
-    <Compile Include="Operation\BaseOperation.cs" />
-    <Compile Include="Operation\Debit.cs" />
+    <Compile Include="Transaction\Credit.cs" />
+    <Compile Include="Transaction\TransactionBase.cs" />
+    <Compile Include="Transaction\Debit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

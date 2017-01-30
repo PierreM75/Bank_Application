@@ -2,12 +2,12 @@ using System;
 
 namespace BankApplication.Model
 {
-    public class OperationDetail
+    public class Operation
     {
-        private readonly DateTime date;
         private readonly int amount;
+        private readonly DateTime date;
 
-        public OperationDetail(DateTime date, int amount)
+        public Operation(DateTime date, int amount)
         {
             this.date = date;
             this.amount = amount;

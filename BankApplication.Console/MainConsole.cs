@@ -6,7 +6,8 @@ namespace BankApplication.Console
     internal class MainConsole
     {
         internal static readonly IClients Context = new Clients();
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             ClientConsole.ClientScreen();
         }

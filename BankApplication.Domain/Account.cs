@@ -1,38 +1,54 @@
-﻿using BankApplication.Domain.Operation;
+﻿using BankApplication.Domain.Transaction;
 using BankApplication.Model;
 using BankApplication.Model.Interface;
 
 namespace BankApplication.Domain
 {
-    public class Account: IAccount
+    public class Account : IAccount
     {
-        private readonly Operations operations = new Operations();
+        private readonly Transactions transactions = new Transactions();
 
-        public BankMessage Deposit(OperationDetail operation)
+        public TransactionMessage Deposit(Operation operation)
         {
-            return operations.Execute(new Credit(operation));
+            var transaction = new Credit(operation);
+            var status = ExecuteTransaction(transaction);
+
+            return new TransactionMessage(status, transaction.Statement());
+        }
+        
+        public TransactionMessage Withdrawal(Operation operation)
+        {
+            var transaction = new Debit(operation);
+            var status = ExecuteTransaction(transaction);
+            
+            return new TransactionMessage(status, transaction.Statement());
         }
 
-        public BankMessage Withdrawal(OperationDetail operation)
-        {
-            return operations.Execute(new Debit(operation));
-        }
-
-        public BankMessage Transfert(IAccount receiver, OperationDetail operation)
+        public TransactionMessage Transfert(IAccount receiver, Operation operation)
         {
             var message = Withdrawal(operation);
-            if (message.Status() != BankStatus.Success )
+            if (message.Status() == TransactionStatus.Success)
             {
-                return message;
+                receiver.Deposit(operation);
             }
             
-            receiver.Deposit(operation);
             return message;
         }
 
         public int Balance()
         {
-            return operations.Balance();
+            return transactions.Balance();
+        }
+
+        private TransactionStatus ExecuteTransaction(TransactionBase transaction)
+        {
+            var status = transaction.IsValid(Balance());
+            if (status == TransactionStatus.Success)
+            {
+                transactions.AddTransaction(transaction);
+            }
+
+            return status;
         }
     }
 }

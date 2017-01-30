@@ -11,18 +11,17 @@ namespace BankApplication.Console
             while (true)
             {
                 System.Console.Clear();
-                System.Console.WriteLine($"Welcome dear {client.Name()}. Your balance account is /d{client.Balance()} €.");
+                System.Console.WriteLine(
+                    $"Welcome dear {client.Name()}. Your balance account is /d{client.Balance()} €.");
                 System.Console.WriteLine("1: Deposit");
                 System.Console.WriteLine("2: Withdrawal");
                 System.Console.WriteLine("3: Transfert");
                 System.Console.WriteLine("q: Quit");
                 var userInput = System.Console.ReadKey();
 
-                OperationDetail operation = null;
+                Operation operation = null;
                 if (userInput.KeyChar != 'q')
-                {
-                    operation = new OperationDetail(DateTime.Today, SelectAmount());
-                }
+                    operation = new Operation(DateTime.Today, SelectAmount());
 
                 switch (userInput.KeyChar)
                 {

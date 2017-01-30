@@ -7,23 +7,23 @@ namespace BankApplication.Tests
     internal class BankApplicationContext
     {
         private readonly IClients clients = new Clients();
-        private BankMessage message;
+        private TransactionMessage message;
 
         internal void CreateClientAccount(string clientName, int amount, string date)
         {
             var client = new Client(clientName);
             clients.Create(client);
-            message = client.Deposit(new OperationDetail(date.ConvertDate(), amount));
+            message = client.Deposit(new Operation(date.ConvertDate(), amount));
         }
 
         internal void Deposit(string clientName, int amount, string date)
         {
-            message = GetClient(clientName).Deposit(new OperationDetail(date.ConvertDate(), amount));
+            message = GetClient(clientName).Deposit(new Operation(date.ConvertDate(), amount));
         }
 
         internal void Withdrawal(string clientName, int amount, string date)
         {
-            var operation = new OperationDetail(date.ConvertDate(), amount);
+            var operation = new Operation(date.ConvertDate(), amount);
             message = GetClient(clientName).Withdrawal(operation);
         }
 
@@ -31,7 +31,7 @@ namespace BankApplication.Tests
         {
             var fromClient = GetClient(fromClientName);
             var toClient = GetClient(toClientName);
-            var operation = new OperationDetail(date.ConvertDate(), amount);
+            var operation = new Operation(date.ConvertDate(), amount);
             message = fromClient.Transfert(toClient, operation);
         }
 
@@ -40,11 +40,11 @@ namespace BankApplication.Tests
             return GetClient(clientName).Balance();
         }
 
-        internal BankMessage Message()
+        internal TransactionMessage Message()
         {
             return message;
         }
-        
+
         internal IClient GetClient(string clientName)
         {
             var client = clients.Select(clientName);

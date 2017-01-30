@@ -1,17 +1,17 @@
 ﻿namespace BankApplication.Model
 {
-    public class BankMessage
+    public class TransactionMessage
     {
-        private readonly BankStatus status;
         private readonly string label;
+        private readonly TransactionStatus status;
 
-        public BankMessage(BankStatus status, string label)
+        public TransactionMessage(TransactionStatus status, string label)
         {
             this.status = status;
             this.label = label;
         }
 
-        public BankStatus Status()
+        public TransactionStatus Status()
         {
             return status;
         }

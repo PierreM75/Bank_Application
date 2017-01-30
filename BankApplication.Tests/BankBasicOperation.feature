@@ -5,39 +5,39 @@
 @mytag
 
 Scenario: Deposit cash on an account
-	Given a empty client bank account
+	Given an empty client bank account
 	When the client do a deposit of 1000€ on 13/01/2017
-	Then he should see a balance account equal to 1000€
+	Then the client should see a balance account equal to 1000€
 
 Scenario: Deposit cash on an account with invalid amount
-	Given a empty client bank account
+	Given an empty client bank account
 	When the client do a deposit of -1000€ on 13/01/2017
-	Then he should see a balance account equal to 0€
-	Then he should be alerted that operation is invalid.
+	Then the client should see a balance account equal to 0€
+	Then the client should be alerted that operation is invalid.
 
 Scenario: Withdrawal cash on an account
-	Given a empty client bank account
+	Given an empty client bank account
 	When the client do a deposit of 2000€ on 13/01/2017
 	And the client do a withdrawal of 1000€ on 14/01/2017
-	Then he should see a balance account equal to 1000€
-	And he should be allowed to withdraw money.
+	Then the client should see a balance account equal to 1000€
+	And the client should be allowed to withdraw money.
 
 Scenario: Withdrawal cash on an account with invalid amount
-	Given a empty client bank account
+	Given an empty client bank account
 	When the client do a withdrawal of -1000€ on 14/01/2017
-	Then he should see a balance account equal to 0€
-	And he should be alerted that operation is invalid.
+	Then the client should see a balance account equal to 0€
+	And the client should be alerted that operation is invalid.
 
-Scenario: Withdrawal cash on an account is forbidden
-	Given a empty client bank account
+Scenario: Withdrawal cash on an account has unsufficient fund
+	Given an empty client bank account
 	When the client do a withdrawal of 1000€ on 13/01/2017
-	Then he should see a balance account equal to 0€
-	And he should not be allowed to withdraw money.
+	Then the client should see a balance account equal to 0€
+	And the client should not be allowed to withdraw money.
 
 Scenario: Execute many basic operations on an account
-	Given a empty client bank account
+	Given an empty client bank account
 	When the client do a deposit of 5000€ on 12/01/2017
 	And the client do a withdrawal of 1000€ on 13/01/2017
 	And the client do a withdrawal of 1000€ on 14/01/2017
-	Then he should see a balance account equal to 3000€
-	And he should be allowed to withdraw money.
+	Then the client should see a balance account equal to 3000€
+	And the client should be allowed to withdraw money.

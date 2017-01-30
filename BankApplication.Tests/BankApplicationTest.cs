@@ -7,7 +7,7 @@ namespace BankApplication.Tests
     public class BankApplicationTest
     {
         private readonly BankApplicationContext context = new BankApplicationContext();
-        private BankMessage message;
+        private TransactionMessage message;
 
         [SetUp]
         public void SetUp()
@@ -21,7 +21,7 @@ namespace BankApplication.Tests
         [TestCase("client0", 1000, "01/01/2017")]
         public void CreateClientAccount(string clientName, int amount, string date)
         {
-            context.CreateClientAccount(clientName,amount, date);
+            context.CreateClientAccount(clientName, amount, date);
             message = context.Message();
             Check.That(message.Label()).Equals($"{date} - Credit - {amount}");
         }
@@ -61,7 +61,7 @@ namespace BankApplication.Tests
             return context.GetBalance(clientName);
         }
 
-        internal BankMessage Message()
+        internal TransactionMessage Message()
         {
             return message;
         }

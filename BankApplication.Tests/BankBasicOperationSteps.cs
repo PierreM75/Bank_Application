@@ -7,17 +7,17 @@ namespace BankApplication.Tests
     [Binding]
     public class BankBasicOperationSteps
     {
-        private BankApplicationTest context;
         private string clientName;
+        private BankApplicationTest context;
 
-        [BeforeScenario()]
+        [BeforeScenario]
         public void Setup()
         {
             context = new BankApplicationTest();
             clientName = "DefaultClient";
         }
 
-        [Given(@"a empty client bank account")]
+        [Given(@"an empty client bank account")]
         public void GivenAEmptyClientBankAccount()
         {
             var date = "01/01/2001";
@@ -36,28 +36,28 @@ namespace BankApplication.Tests
             context.Withdrawal(clientName, amount, date);
         }
 
-        [Then(@"he should see a balance account equal to (.*)€")]
+        [Then(@"the client should see a balance account equal to (.*)€")]
         public void ThenHeShouldSeeABalanceAccountEqualTo(int amount)
         {
             Check.That(context.GetBalance(clientName).Equals(amount));
         }
 
-        [Then(@"he should not be allowed to withdraw money\.")]
+        [Then(@"the client should not be allowed to withdraw money\.")]
         public void ThenHeShouldNotBeAllowedToWithdrawMoney()
         {
-            Check.That(context.Message().Status()).Equals(BankStatus.InsufficientFund);
+            Check.That(context.Message().Status()).Equals(TransactionStatus.InsufficientFund);
         }
 
-        [Then(@"he should be allowed to withdraw money\.")]
+        [Then(@"the client should be allowed to withdraw money\.")]
         public void ThenHeShouldBeAllowedToWithdrawMoney()
         {
-            Check.That(context.Message().Status()).Equals(BankStatus.Success);
+            Check.That(context.Message().Status()).Equals(TransactionStatus.Success);
         }
-        
-        [Then(@"he should be alerted that operation is invalid\.")]
+
+        [Then(@"the client should be alerted that operation is invalid\.")]
         public void ThenHeShouldBeAlertedThatOperationIsInvalid()
         {
-            Check.That(context.Message().Status()).Equals(BankStatus.InvalidOperation);
+            Check.That(context.Message().Status()).Equals(TransactionStatus.InvalidOperation);
         }
     }
 }

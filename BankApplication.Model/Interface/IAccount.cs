@@ -2,11 +2,11 @@ namespace BankApplication.Model.Interface
 {
     public interface IAccount
     {
-        BankMessage Deposit(OperationDetail operation);
+        TransactionMessage Deposit(Operation operation);
 
-        BankMessage Withdrawal(OperationDetail operation);
+        TransactionMessage Withdrawal(Operation operation);
 
-        BankMessage Transfert(IAccount receiver, OperationDetail operation);
+        TransactionMessage Transfert(IAccount receiver, Operation operation);
 
         int Balance();
     }

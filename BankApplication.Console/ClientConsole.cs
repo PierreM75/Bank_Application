@@ -40,9 +40,7 @@ namespace BankApplication.Console
                 System.Console.WriteLine("Please Indicate the client's name or press q to quit and press enter:");
                 var userInput = System.Console.ReadLine();
                 if (userInput == "q")
-                {
                     return null;
-                }
 
                 client = MainConsole.Context.Select(userInput);
                 System.Console.WriteLine(client == null ? "Unknown client." : "Client loaded.");
